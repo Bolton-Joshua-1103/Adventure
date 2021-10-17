@@ -1,10 +1,10 @@
 #pragma once
-#include <vector>
+#include <deque>
 #include <memory>
 #include "IGameObject.h"
 
 class Cell {
 public:
-   std::vector<std::shared_ptr<IGameObject>> game_objects;
+   std::deque<std::shared_ptr<IGameObject>> game_objects;
 
 };

@@ -31,6 +31,7 @@ int main()
 
    Cave cave;
    createCave(AdventureData::troll_cave_data, cave);
+   createCaveInteractive(AdventureData::interactive_troll_cave_data, cave);
 
    cout << endl << endl << endl;
    cout << "================================================" << endl;

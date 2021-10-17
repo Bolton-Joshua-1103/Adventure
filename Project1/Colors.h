@@ -25,6 +25,7 @@
 #define BrightGreenMacro "\x1B[92m"
 #define BrightBlackMacro "\x1B[90m"
 #define BrightMagentaMacro "\x1B[95m"
+#define BrightYelloMacro "\x1B[93m"
 
 ///
 #define BGBrightBlueMacro "\x1B[104m"

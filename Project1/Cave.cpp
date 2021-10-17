@@ -38,3 +38,12 @@ void createCave(const CaveData& cave_data, Cave& cave)
       }
    }
 }
+
+// Purpose: Create interactable cave objects
+void createCaveInteractive(const vector<InteractiveData>& interactive_data_list, Cave& cave) {
+   for (const auto& data : interactive_data_list) {
+      auto& current_cell = cave[data.row][data.col];
+      auto game_object = createGameObject(data.token);
+      current_cell.game_objects.push_front(game_object); // 
+   }
+}

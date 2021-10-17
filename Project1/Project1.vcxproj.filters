@@ -59,13 +59,16 @@
     <ClInclude Include="GameObjectFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Colors.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="GrassTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
