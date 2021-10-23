@@ -34,7 +34,9 @@ const CaveData AdventureData::troll_cave_data   // Definition
 };
 
 const vector<InteractiveData> AdventureData::interactive_troll_cave_data{
-   {9,30, 'P'},
+   /*Interactive Data does NOT include Player*/
+   
+   //{9,30, 'P'},
 };
 
 void AdventureData::printCaveData(const CaveData& cave_data)

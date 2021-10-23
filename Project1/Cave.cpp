@@ -1,8 +1,10 @@
 #include <iostream>
+#include <cassert>
 #include "Cave.h"
 #include "AdventureData.h"
 #include "IGameObject.h"
 #include "GameObjectFactory.h"
+
 
 using namespace std;
 // Purpose: Print out the cave using the fancy symbols
@@ -17,8 +19,8 @@ void printCave(const Cave& cave)
                break;
             }
          }
-      //cout << cave_elem->getSymbol();
-   }
+         //cout << cave_elem->getSymbol();
+      }
       cout << endl;
    }
 }
@@ -46,4 +48,12 @@ void createCaveInteractive(const vector<InteractiveData>& interactive_data_list,
       auto game_object = createGameObject(data.token);
       current_cell.game_objects.push_front(game_object); // 
    }
+}
+
+shared_ptr<Player> createPlayer(size_t cave_row, size_t cave_col, Cave& cave) {
+   assert(cave_row < cave.size());
+   assert(cave_col < cave[cave_row].size());
+   auto player = make_shared<Player>(cave_row, cave_col);
+   cave[cave_row][cave_col].game_objects.push_front(player);
+   return player;
 }

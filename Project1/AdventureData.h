@@ -16,6 +16,7 @@ public:
    static const CaveData troll_cave_data; // Declaration
    static const std::vector<InteractiveData> interactive_troll_cave_data;
    static void printCaveData(const CaveData& cave_data);
-
+   static const size_t playerStartingRow{ 18 };
+   static const size_t playerStartingCol { 18 };
    static const char ErrorTileChar = '!';
 };
