@@ -12,4 +12,5 @@ class Tile : public IGameObject
    const std::string& getSymbol() const override { return tile_symbol; };
 
    bool isDisplayable() const override {return true; };
+   bool isSolid() const override { return false; };
 };

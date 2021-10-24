@@ -9,4 +9,5 @@ struct  IGameObject {
    virtual const std::string& getSymbol() const = 0;
 
    virtual bool isDisplayable() const = 0;
+   virtual bool isSolid() const = 0;
 };

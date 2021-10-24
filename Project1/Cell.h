@@ -6,5 +6,6 @@
 class Cell {
 public:
    std::deque<std::shared_ptr<IGameObject>> game_objects;
+   bool canPlayerEnter();
 
 };

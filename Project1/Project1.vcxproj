@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="AdventureData.cpp" />
     <ClCompile Include="Cave.cpp" />
+    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerWindowCoords.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdventureData.h" />
@@ -159,7 +161,9 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="OpenTile.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerWindowCoords.h" />
     <ClInclude Include="StoneTile.h" />
+    <ClInclude Include="Sword.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TrashTile.h" />
     <ClInclude Include="WaterTile.h" />

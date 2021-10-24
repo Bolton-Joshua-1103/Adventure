@@ -1,6 +1,7 @@
 #pragma once
 #include "IGameObject.h"
-#include "Colors.h"  
+#include "Colors.h"
+#include "Coord.h"
 
 class Player : public IGameObject
 {
@@ -11,12 +12,13 @@ private:
    std::string player_symbol{ BrightYelloMacro "\xEB" ColorResetMacro };
 
 public:
-   size_t row{};
-   size_t col{};
+
+   const int view_distance{ 5 };
+   Coord location{ 0, 0 };
    Player(size_t _row, size_t _col)
    {
-      row = _row;
-      col = _col;
+      location.row = _row;
+      location.col = _col;
    }
 
 
@@ -25,4 +27,5 @@ public:
    const std::string& getSymbol() const override { return player_symbol; };
 
    bool isDisplayable() const override { return true; };
+   bool isSolid() const override { return true; };
 };

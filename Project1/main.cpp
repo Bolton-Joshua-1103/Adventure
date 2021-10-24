@@ -7,6 +7,7 @@
 #include <cassert>
 #include <conio.h>
 #include <stdlib.h>
+#include <cassert>
 
 #include "IGameObject.h"
 #include "Colors.h"
@@ -21,13 +22,14 @@
 
 #include "AdventureData.h"
 #include "GameController.h"
+#include "PlayerWindowCoords.h"
 #include "Cave.h"
 #include "main.h"
 
-// Extended ASCII: http://www.maxi-pedia.com/code+ASCII
+// Extstd::endled ASCII: http://www.maxi-pedia.com/code+ASCII
 
 using namespace std;
-#define dbgln(x) cout << #x << ": " << (x) << endl;
+#define dbgln(x) std::cout << #x << ": " << (x) << std::endl;
 
 enum class CommandType {
    NoCommand = 0,
@@ -47,7 +49,7 @@ CommandType getCmd() {
    auto cmd = CommandType::NoCommand;
 
    auto key_press = _getch();
-   cout << "You pressed: " << key_press << endl;
+   std::cout << "You pressed: " << key_press << std::endl;
    switch (key_press) {
    case '8': {cmd = CommandType::MoveUp; } break;
    case '2': {cmd = CommandType::MoveDown; } break;
@@ -61,9 +63,8 @@ CommandType getCmd() {
    return cmd;
 }
 
-// Purpose: Render all graphics to the console
+// Purpose: Rstd::endler all graphics to the console
 void renderGame() {
-
    system("CLS");
    printCave(GameController::cave);
 }
@@ -76,29 +77,25 @@ void initializeGame() {
    GameController::player = createPlayer(AdventureData::playerStartingRow, AdventureData::playerStartingCol, GameController::cave);
 }
 
-// Purpose: Determine if coordinates are inside the map
-bool isInCaveRange(Coord& coord, Cave& cave) {
-   if (coord.row < 0 || coord.row >= cave.size()) return false;
-   if (coord.col < 0 || coord.col >= cave[coord.row].size()) return false;
-   return true;
-}
-
-
 void movePlayer(const Coord& delta)
 {
    auto& player = GameController::player;
-   auto& old_cell = GameController::cave[player->row][player->col];
-   Coord new_player_coord{ (player->row + delta.row), player->col + delta.col };
+   auto& old_cell = GameController::cave[player->location.row][player->location.col];
+   Coord new_player_coord{ (player->location.row + delta.row), player->location.col + delta.col };
    if (isInCaveRange(new_player_coord, GameController::cave)) {
-      player->row += delta.row;
-      player->col += delta.col;// We will need to validate this to the correct cave range
 
-      auto& new_cell = GameController::cave[player->row][player->col];
+      auto& new_cell = GameController::cave[new_player_coord.row][new_player_coord.col];
+      if (new_cell.canPlayerEnter()) {
 
-      old_cell.game_objects.pop_front(); // need to maek sure we're popping the player (pop_front may not be the correct functino) or validation
-      new_cell.game_objects.push_front(player);
+         player->location.row += delta.row;
+         player->location.col += delta.col;
+
+         assert(old_cell.game_objects.front() != nullptr); // make sure there is something in the front of the cell dequeue
+         assert(dynamic_cast<Player*>(old_cell.game_objects.front().get()) != nullptr); // Checking to see if this is a player (or can be evaluated to a player via an inheritance relationship)
+         old_cell.game_objects.pop_front(); // need to maek sure we're popping the player (pop_front may not be the correct functino) or validation
+         new_cell.game_objects.push_front(player);
+      }
    }
-
 }
 
 bool playGame() {
@@ -110,8 +107,9 @@ bool playGame() {
 
    while (!done) {
       renderGame();
-
-      cout << "Enter play command" << endl;
+      //PlayerWindowCoords cameraCoord = calcCameraRange(GameController::player->location, GameController::cave);// @@@ Crashing our program :D
+      //printPlayerView(cameraCoord, GameController::cave);
+      std::cout << "Enter play command" << std::endl;
       auto cmd = getCmd();
 
       switch (cmd)
@@ -119,35 +117,35 @@ bool playGame() {
 
       case CommandType::MoveUp:
       {
-         cout << "Move player up" << endl;     
+         std::cout << "Move player up" << std::endl;     
          movePlayer(Coord{-1,0});
       }
       break;
 
       case CommandType::MoveDown:
       {
-         cout << "Move player down" << endl;
+         std::cout << "Move player down" << std::endl;
          movePlayer(Coord{ 1,0 });
       }
       break;
 
       case CommandType::MoveLeft:
       {
-         cout << "Move player Left" << endl;
+         std::cout << "Move player Left" << std::endl;
          movePlayer(Coord{ 0,-1 });
       }
       break;
 
       case CommandType::MoveRight:
       {
-         cout << "Move player Right" << endl;
+         std::cout << "Move player Right" << std::endl;
          movePlayer(Coord{ 0,1 });
       }
       break;
 
       case CommandType::ExitGame:
       {
-         cout << "Exiting Game" << endl;
+         std::cout << "Exiting Game" << std::endl;
          done = true;
       }
       break;
@@ -158,9 +156,9 @@ bool playGame() {
          break;
       }
    }
-   cout << "Do you want to play again (y/n)? ";
+   std::cout << "Do you want to play again (y/n)? ";
    bool play_again = ((char)_getch() == 'y') ? true : false;
-   cout << endl;
+   std::cout << std::endl;
 
    return play_again;
 
