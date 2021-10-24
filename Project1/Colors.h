@@ -21,6 +21,7 @@
    //Bright White    97  107
 
 #define ColorResetMacro  "\033[0m"
+#define BrightRedMacro "\x1B[91m"
 #define BrightBlueMacro "\x1B[94m"
 #define BrightGreenMacro "\x1B[92m"
 #define BrightBlackMacro "\x1B[90m"
