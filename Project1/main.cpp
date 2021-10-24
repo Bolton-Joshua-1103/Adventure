@@ -63,10 +63,20 @@ CommandType getCmd() {
    return cmd;
 }
 
+// Purpose: Print Player Inventory to screen
+void printPlayerInventory(const Player& player) {
+   cout << "Inventory: ";
+   for (const auto& item : player.inventory) {
+      cout << item.second->getName() << " ";
+   }
+   cout << endl;
+}
 // Purpose: Rstd::endler all graphics to the console
 void renderGame() {
    system("CLS");
    printCave(GameController::cave);
+   printCellInteractableObj(GameController::cave);
+   printPlayerInventory(*GameController::player);
 }
 
 void initializeGame() {
@@ -98,6 +108,22 @@ void movePlayer(const Coord& delta)
    }
 }
 
+void pickUpItem() {
+   const auto& player_cave_cell = GameController::cave[GameController::player->location.row][GameController::player->location.col];
+   for (const auto& game_obj_sptr : player_cave_cell.game_objects) {
+   //for (auto iter{player_cave_cell.game_objects.begin()}; iter < player_cave_cell.game_objects.end(); iter++) {
+      const auto& interactable_ptr = dynamic_cast<IItemInteractable*>(game_obj_sptr.get());
+      if (interactable_ptr != nullptr) {
+         /*Adding interactable item to invenotry*/
+         std::shared_ptr<IItemInteractable>tmp_ptr = std::dynamic_pointer_cast<IItemInteractable>(game_obj_sptr);//Converting to the correct pointer type (IItemInteractable) for player.inventory(map<string,IItemInteractable>)
+         GameController::player->inventory.insert({ interactable_ptr->getName(), tmp_ptr });
+
+         /*Removing interactable item from cell*/
+         //@@@@ delete from cell now !
+      }
+   }
+}
+
 bool playGame() {
    bool done{ false };// Determine if we are replaying
 
@@ -114,11 +140,16 @@ bool playGame() {
 
       switch (cmd)
       {
-
+      case CommandType::PickUp:
+      {
+         pickUpItem();
+      }
+      break;
+      
       case CommandType::MoveUp:
       {
-         std::cout << "Move player up" << std::endl;     
-         movePlayer(Coord{-1,0});
+         std::cout << "Move player up" << std::endl;
+         movePlayer(Coord{ -1,0 });
       }
       break;
 
@@ -153,7 +184,7 @@ bool playGame() {
       default:
       {
       }
-         break;
+      break;
       }
    }
    std::cout << "Do you want to play again (y/n)? ";

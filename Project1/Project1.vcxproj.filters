@@ -95,5 +95,8 @@
     <ClInclude Include="Sword.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="IItemInteractable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

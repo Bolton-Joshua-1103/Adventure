@@ -9,6 +9,7 @@
 #include "GameObjectFactory.h"
 #include "GameController.h"
 #include "Coord.h"
+#include "IItemInteractable.h"
 
 using namespace std;
 
@@ -38,6 +39,18 @@ void printCave(const Cave& cave)
    }
 }
 
+// Purpose: Print out the interactable objects inside the player's cell
+void printCellInteractableObj(const Cave& cave) {
+   const auto& player_cave_cell = cave[GameController::player->location.row][GameController::player->location.col];
+   for (const auto& game_obj_sptr : player_cave_cell.game_objects) {
+      const auto& interactable_ptr = dynamic_cast<IItemInteractable*>(game_obj_sptr.get());
+      if(interactable_ptr != nullptr){
+         cout << interactable_ptr->standingOnItem() << endl;
+      }
+   }
+}
+
+// Purpose: Print player window based on player view distance (WIP) @@@@
 void printPlayerView(PlayerWindowCoords& camera_coords, const Cave& cave) {
    //finally here
    cout << "Finally here" << endl;

@@ -1,7 +1,11 @@
 #pragma once
+#include <map>
+
 #include "IGameObject.h"
 #include "Colors.h"
 #include "Coord.h"
+#include "IItemInteractable.h"
+
 
 class Player : public IGameObject
 {
@@ -12,7 +16,8 @@ private:
    std::string player_symbol{ BrightYelloMacro "\xEB" ColorResetMacro };
 
 public:
-
+   std::map<std::string, std::shared_ptr<IItemInteractable>> inventory;
+   
    const int view_distance{ 5 };
    Coord location{ 0, 0 };
    Player(size_t _row, size_t _col)
