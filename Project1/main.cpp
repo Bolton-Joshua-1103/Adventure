@@ -108,20 +108,24 @@ void movePlayer(const Coord& delta)
    }
 }
 
+// Purpose: Removes an item from the cell deque and adds it to the players inventory
+// The player must be in the cell they wish to pick up the item from. (as we're removing from the cell the player is in)
 void pickUpItem() {
-   const auto& player_cave_cell = GameController::cave[GameController::player->location.row][GameController::player->location.col];
-   for (const auto& game_obj_sptr : player_cave_cell.game_objects) {
-   //for (auto iter{player_cave_cell.game_objects.begin()}; iter < player_cave_cell.game_objects.end(); iter++) {
-      const auto& interactable_ptr = dynamic_cast<IItemInteractable*>(game_obj_sptr.get());
-      if (interactable_ptr != nullptr) {
-         /*Adding interactable item to invenotry*/
-         std::shared_ptr<IItemInteractable>tmp_ptr = std::dynamic_pointer_cast<IItemInteractable>(game_obj_sptr);//Converting to the correct pointer type (IItemInteractable) for player.inventory(map<string,IItemInteractable>)
-         GameController::player->inventory.insert({ interactable_ptr->getName(), tmp_ptr });
+   auto& player_cave_cell = GameController::cave[GameController::player->location.row][GameController::player->location.col];
 
-         /*Removing interactable item from cell*/
-         //@@@@ delete from cell now !
+   auto erased2 = std::erase_if(player_cave_cell.game_objects, [&](const auto& gameobject) {
+
+      bool erase{ false };
+      const auto& interactable_ptr = dynamic_cast<IItemInteractable*>(gameobject.get());
+      if (interactable_ptr != nullptr) {
+         // castable(it is interactable)
+         erase = true;
+
+         std::shared_ptr<IItemInteractable>tmp_ptr = std::dynamic_pointer_cast<IItemInteractable>(gameobject);//Converting to the correct pointer type (IItemInteractable) for player.inventory(map<string,IItemInteractable>)
+         GameController::player->inventory.insert({ interactable_ptr->getName(), tmp_ptr }); // Inserted into player inventory
       }
-   }
+      return erase;
+      });
 }
 
 bool playGame() {
@@ -145,7 +149,7 @@ bool playGame() {
          pickUpItem();
       }
       break;
-      
+
       case CommandType::MoveUp:
       {
          std::cout << "Move player up" << std::endl;

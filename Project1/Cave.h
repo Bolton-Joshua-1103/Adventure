@@ -8,6 +8,8 @@
 
 using Cave = std::vector <std::vector <Cell>>;
 
+//typedef std::vector<std::vector <Cell>> Cave; 
+//This is the EXACT same as the above using statment
 void printCave(const Cave& cave);
 void printPlayerView(PlayerWindowCoords& camera_coords, const Cave& cave);
 void createCave(const CaveData& cave_data, Cave& cave);
