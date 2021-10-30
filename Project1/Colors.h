@@ -23,9 +23,11 @@
 #define ColorResetMacro  "\033[0m"
 #define BrightRedMacro "\x1B[91m"
 #define BrightBlueMacro "\x1B[94m"
+#define BrightCyanMacro "\x1B[36m"
 #define BrightGreenMacro "\x1B[92m"
 #define BrightBlackMacro "\x1B[90m"
 #define BrightMagentaMacro "\x1B[95m"
+#define BrightWhiteMacro "\x1B[37m"
 #define BrightYelloMacro "\x1B[93m"
 
 ///
@@ -33,3 +35,4 @@
 #define BGBrightYellowMacro "\x1B[103m"
 #define BGBrightGreenMacro "\x1B[102m"
 #define BGDarkGreenMacro "\x1B[42m"
+#define BGDarkBlueMacro "\x1B[44m"

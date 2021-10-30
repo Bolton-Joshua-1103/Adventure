@@ -92,10 +92,16 @@
     <ClInclude Include="Coord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sword.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="IItemInteractable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICreature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Troll.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

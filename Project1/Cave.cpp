@@ -10,6 +10,7 @@
 #include "GameController.h"
 #include "Coord.h"
 #include "IItemInteractable.h"
+#include "ICreature.h"
 
 using namespace std;
 

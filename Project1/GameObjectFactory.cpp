@@ -8,6 +8,7 @@
 #include "ErrorTile.h"
 #include "GrassTile.h"
 #include "Sword.h"
+#include "Troll.h"
 
 using namespace std;
 
@@ -24,6 +25,7 @@ std::shared_ptr<IGameObject> createGameObject(char object_type_char) {
    case 'g':            return make_shared<GrassTile>();
    case ErrorTileChar:  return make_shared<ErrorTile>();
    case 's':            return make_shared<Sword>();
+   case 'T':            return make_shared<Troll>();
 //   case 'P':            return make_shared<Player>();
    default:             return make_shared<ErrorTile>(); // Make an ErrorTile by default
    }
