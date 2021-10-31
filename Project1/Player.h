@@ -10,8 +10,6 @@
 class Player : public IGameObject
 {
 private:
-
-
    std::string player_obj_type{ "Player" };
    std::string player_symbol{ BrightYelloMacro "\xEB" ColorResetMacro };
 

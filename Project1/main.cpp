@@ -137,8 +137,8 @@ bool playGame() {
 
    while (!done) {
       renderGame();
-      //PlayerWindowCoords cameraCoord = calcCameraRange(GameController::player->location, GameController::cave);// @@@ Crashing our program :D
-      //printPlayerView(cameraCoord, GameController::cave);
+      PlayerWindowCoords cameraCoord = calcCameraRange(GameController::player->location, GameController::cave);// @@@ Crashing our program :D
+      printPlayerView(cameraCoord, GameController::cave);
       std::cout << "Enter play command" << std::endl;
       auto cmd = getCmd();
 

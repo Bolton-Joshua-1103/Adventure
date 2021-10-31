@@ -19,10 +19,10 @@ void PlayerWindowCoords::printCaveWindowCoords() {
 }
 
 void PlayerWindowCoords::calcWindowCoords(const Coord& location) {
-   upper_left = Coord{ location.row - GameController::player->view_distance, location.col - (2*GameController::player->view_distance) };
-   upper_right = Coord{ location.row - GameController::player->view_distance, location.col + (2 * GameController::player->view_distance) };
-   lower_left = Coord{ location.row + GameController::player->view_distance, location.col - (2 * GameController::player->view_distance) };
-   lower_right = Coord{ location.row + GameController::player->view_distance, location.col + (2 * GameController::player->view_distance) };
+   upper_left = Coord{ location.row - GameController::player->view_distance, location.col - (GameController::player->view_distance) };
+   upper_right = Coord{ location.row - GameController::player->view_distance, location.col + ( GameController::player->view_distance) };
+   lower_left = Coord{ location.row + GameController::player->view_distance, location.col - (GameController::player->view_distance) };
+   lower_right = Coord{ location.row + GameController::player->view_distance, location.col + (GameController::player->view_distance) };
 }
 
 PlayerWindowCoords::PlayerWindowCoords(const Coord& location) : upper_left{ location.row - GameController::player->view_distance, location.col - GameController::player->view_distance },
