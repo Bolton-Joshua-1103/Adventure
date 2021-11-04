@@ -1,6 +1,7 @@
 #include "PlayerWindowCoords.h"
 #include "GameController.h"
 
+int scaling_factor{ 2 };
 
 void PlayerWindowCoords::printWindowCoords() {
    std::cout << "Upper_left(row,col): (" << upper_left.row << "," << upper_left.col << ")." << std::endl;
@@ -25,10 +26,10 @@ void PlayerWindowCoords::calcWindowCoords(const Coord& location) {
    lower_right = Coord{ location.row + GameController::player->view_distance, location.col + (GameController::player->view_distance) };
 }
 
-PlayerWindowCoords::PlayerWindowCoords(const Coord& location) : upper_left{ location.row - GameController::player->view_distance, location.col - GameController::player->view_distance },
-upper_right{ location.row - GameController::player->view_distance, location.col + GameController::player->view_distance },
-lower_left{ location.row + GameController::player->view_distance, location.col - GameController::player->view_distance },
-lower_right{ location.row + GameController::player->view_distance, location.col + GameController::player->view_distance }, player_view_distance{ 5 }
+PlayerWindowCoords::PlayerWindowCoords(const Coord& location) : upper_left{ location.row - GameController::player->view_distance, location.col - (scaling_factor * GameController::player->view_distance) },
+upper_right{ location.row - GameController::player->view_distance, location.col + (scaling_factor * GameController::player->view_distance) },
+lower_left{ location.row + GameController::player->view_distance, location.col - (scaling_factor * GameController::player->view_distance) },
+lower_right{ location.row + GameController::player->view_distance, location.col + (scaling_factor * GameController::player->view_distance) }, player_view_distance{ 5 }
 {
    if (upper_left.row < 0 || lower_right.row >= static_cast<int>(GameController::cave.size())) {
       row_delta = (upper_left.row < 0) ? upper_left.row : abs(static_cast<int>(GameController::cave.size()) - (lower_right.row));
