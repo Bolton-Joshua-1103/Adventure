@@ -46,7 +46,7 @@ lower_right{ location.row + GameController::player->view_distance, location.col 
    cave_lower_left = Coord{ lower_left.row - row_delta, lower_left.col - col_delta };
    cave_lower_right = Coord{ lower_right.row - row_delta, lower_right.col - col_delta };
 
-   printWindowCoords();
+   //printWindowCoords();
    std::cout << std::endl;
-   printCaveWindowCoords();
+   //printCaveWindowCoords();
 }
