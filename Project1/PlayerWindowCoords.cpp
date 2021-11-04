@@ -31,11 +31,11 @@ lower_left{ location.row + GameController::player->view_distance, location.col -
 lower_right{ location.row + GameController::player->view_distance, location.col + GameController::player->view_distance }, player_view_distance{ 5 }
 {
    if (upper_left.row < 0 || lower_right.row >= static_cast<int>(GameController::cave.size())) {
-      row_delta = (upper_left.row < 0) ? upper_left.row : abs(static_cast<int>(GameController::cave.size() - 1) - (lower_right.row));
+      row_delta = (upper_left.row < 0) ? upper_left.row : abs(static_cast<int>(GameController::cave.size()) - (lower_right.row));
    }
    else { row_delta = 0; }
    if (upper_left.col < 0 || lower_right.col >= static_cast<int>(GameController::cave[location.row].size())) {
-      col_delta = (upper_left.col < 0) ? (upper_left.col) : abs(static_cast<int>(GameController::cave[location.row].size() - 1) - (lower_right.col));
+      col_delta = (upper_left.col < 0) ? (upper_left.col) : abs(static_cast<int>(GameController::cave[location.row].size()) - (lower_right.col));
    }
    else { col_delta = 0; }
 
